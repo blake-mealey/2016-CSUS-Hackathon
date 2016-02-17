@@ -3,6 +3,8 @@ using System.Collections;
 
 public class MovementScript : MonoBehaviour {
 
+	public Animator animator;
+
 	private bool up;
 	private bool down;
 	private bool left;
@@ -20,6 +22,9 @@ public class MovementScript : MonoBehaviour {
 		down = Input.GetKey(KeyCode.DownArrow);
 		left = Input.GetKey(KeyCode.LeftArrow);
 		right = Input.GetKey(KeyCode.RightArrow);
+
+		animator.SetInteger("Vertical", (up ? 1 : 0) - (down ? 1 : 0));
+		animator.SetInteger("Horizontal", (right ? 1 : 0) - (left ? 1 : 0));
 
 	}
 
