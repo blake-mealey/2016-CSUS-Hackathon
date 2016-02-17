@@ -27,7 +27,7 @@ public class MovementScript : MonoBehaviour {
 
 		Rigidbody2D myRigidbody = GetComponent<Rigidbody2D>();
 
-		myRigidbody.velocity = new Vector2((right ? 1f : left ? -1f : 0),(up ? 1f : down ? -1f : 0));
+		myRigidbody.velocity = new Vector2((right ? 1 : 0) - (left ? 1 : 0), (up ? 1 : 0) - (down ? 1 : 0));
 
 	}
 }
