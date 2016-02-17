@@ -4,6 +4,7 @@ using System.Collections;
 public class DoorScript : MonoBehaviour, InteractInterface {
 
 	public string message = "Press 'E' to go through the door.";
+    public string message2 = "I got through.";
 	public bool locked = false;
 	public Vector3 toPosition;
 
@@ -24,6 +25,7 @@ public class DoorScript : MonoBehaviour, InteractInterface {
 			if(ctime>=moveTime){
 				player.transform.position = toPosition;
 				movePlayer = false;
+				UIController.instance.setText(2, message2);
 			}
 		}
 	}
@@ -32,11 +34,12 @@ public class DoorScript : MonoBehaviour, InteractInterface {
 		UIController.instance.setText(2, message);
 		collider.transform.GetComponent<PlayerInteractScript>().addAction((InteractInterface)this);
 		player = collider.transform;
+        ctime = 0;
 	}
 	//leaves door influence
 	void OnTriggerExit2D(Collider2D collider){
 		collider.transform.GetComponent<PlayerInteractScript>().removeAction();
-	}
+    }
 	public void doAction(){
 		UIController.instance.cameraFade(1f,0.5f);
 		movePlayer = true;
