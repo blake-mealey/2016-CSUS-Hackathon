@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour {
 	public Attack[] enemyAttacks;
 	public float[] attackProbabilities;
 	public string[] complaints;
+	public float startingHealth;
+	public float currentHealth;
 
 	private float totalProbabilities = 0;
 
@@ -16,7 +18,7 @@ public class Enemy : MonoBehaviour {
 		}
 	}
 
-	public Attack getEnemyAttack(){
+	public Attack getNextEnemyAttack(){
 
 		float temp = Random.Range(0f,totalProbabilities);
 		float currentValue = 0;
@@ -27,5 +29,12 @@ public class Enemy : MonoBehaviour {
 		}
 		return enemyAttacks[0];
 	}
-
+	public bool applyDamage(float d){
+		currentHealth-=d;
+		if(currentHealth<=0)
+			return true;
+		else
+			return false;
+		
+	}
 }
