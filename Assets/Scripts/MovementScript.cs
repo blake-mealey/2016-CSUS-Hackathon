@@ -8,9 +8,11 @@ public class MovementScript : MonoBehaviour {
 	private bool left;
 	private bool right;
 
+	Rigidbody2D myRigidbody;
+
 	// Use this for initialization
 	void Start () {
-		
+		myRigidbody = GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame
@@ -24,8 +26,6 @@ public class MovementScript : MonoBehaviour {
 	}
 
 	void FixedUpdate(){
-
-		Rigidbody2D myRigidbody = GetComponent<Rigidbody2D>();
 
 		myRigidbody.velocity = new Vector2((right ? 1 : 0) - (left ? 1 : 0), (up ? 1 : 0) - (down ? 1 : 0));
 
