@@ -39,6 +39,7 @@ public class DoorScript : MonoBehaviour, InteractInterface {
 	//leaves door influence
 	void OnTriggerExit2D(Collider2D collider){
 		collider.transform.GetComponent<PlayerInteractScript>().removeAction();
+		UIController.instance.hideBubbles();
     }
 	public void doAction(){
 		UIController.instance.cameraFade(1f,0.5f);
