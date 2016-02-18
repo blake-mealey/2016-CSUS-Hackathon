@@ -1,9 +1,10 @@
 fileFormatVersion: 2
-guid: ecfb158d1f5f5da41b07dc510d382074
-timeCreated: 1455819466
+guid: e1093922681bd92478bbd497d95884b7
+timeCreated: 1455829873
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Couch_0
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -38,18 +39,29 @@ TextureImporter:
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 3000
+  spriteBorder: {x: 2, y: 0, z: 3, w: 17}
+  spritePixelsToUnits: 100
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: Couch_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 0
+        width: 27
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
     outline: []
   spritePackingTag: 
   userData: 
