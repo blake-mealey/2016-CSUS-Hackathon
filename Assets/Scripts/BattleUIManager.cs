@@ -19,6 +19,7 @@ public class BattleUIManager : MonoBehaviour {
 	private bool fadeText = false;
 	private float ctime = 0;
 	private float textFadeTime = 0.3f;
+	private bool complainButton = true;
 	// Use this for initialization
 	void Start () {
 		instance = this;
@@ -88,6 +89,12 @@ public class BattleUIManager : MonoBehaviour {
 		enemyText.text = enemyText.text += "\n" + attack.attackDescription;
 		playerText.text = attack.effectDescription;
 	}
+	public void displayComplaint(string complaint){
+		showText();
+		playerTurnEnd();
+		playerText.text = complaint;
+		enemyText.text = "...";
+	}
 	public void playerTurnEnd(){
 		openMenu(0);
 		Button[] buttons = options.GetComponentsInChildren<Button>();
@@ -98,7 +105,13 @@ public class BattleUIManager : MonoBehaviour {
 	public void startPlayerTurn(){
 		Button[] buttons = options.GetComponentsInChildren<Button>();
 		for(int j = 0;j<buttons.Length;j++){
-			buttons[j].interactable = true;
+			if(!(complainButton==false && j==3)){
+				buttons[j].interactable = true;
+			}
+
 		}
+	}
+	public void doneComplaining(){
+		complainButton = false;
 	}
 }

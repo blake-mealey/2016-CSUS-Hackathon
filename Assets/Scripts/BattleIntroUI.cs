@@ -31,6 +31,7 @@ public class BattleIntroUI : MonoBehaviour {
 			if(ctime>=waitTime){
 				task++;
 				ctime = 0;
+				BattleUIManager.instance.playerTurnEnd();
 			}
 			break;
 		case 1://Scales the you text
@@ -84,6 +85,10 @@ public class BattleIntroUI : MonoBehaviour {
 				task++;
 				ctime = 0;
 			}
+			break;
+		case 8:
+			task++;
+			BattleUIManager.instance.startPlayerTurn();
 			break;
 		}
 

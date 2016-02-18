@@ -71,6 +71,11 @@ public class BattleManager : MonoBehaviour {
 		int num = Random.Range(0,complaints.Count);
 		string temp = complaints[num];
 		complaints.RemoveAt(num);
+		BattleUIManager.instance.displayComplaint(temp);
+		if(complaints.Count==0){
+			BattleUIManager.instance.doneComplaining();
+		}
+		textShowing = true;
 	}
 	// Update is called once per frame
 	void Update () {
