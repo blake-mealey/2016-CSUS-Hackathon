@@ -24,13 +24,13 @@ public class HealthBarController : MonoBehaviour {
 	public void updateHealth(float h){
 		currentHealth = h;
 		float ratio = currentHealth/startingHealth;
-		filler.transform.localScale = new Vector3(ratio,1,1);
+		filler.transform.localScale = new Vector3(1f-ratio,1,1);
 
 		for(int j = 0;j<healthStates.Length;j++){
 			healthStates[j].SetActive(false);
 		}
 		for(int k = 0;k<healthSwitchValues.Length;k++){
-			if(ratio<healthSwitchValues[k]){
+			if(ratio>healthSwitchValues[k]){
 				healthStates[k].SetActive(true);
 				break;
 			}
