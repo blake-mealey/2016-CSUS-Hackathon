@@ -27,7 +27,7 @@ public class BattleManager : MonoBehaviour {
 	void Start () {
 		instance = this;
 
-		PlayerPrefs.SetString("EnemyName", "BaristaEnemy");
+		PlayerPrefs.SetString("EnemyName", "Clock");
 		currentHealth = playerHealth;
 		enemyObj = (GameObject)Instantiate(Resources.Load(PlayerPrefs.GetString("EnemyName")));
 		enemyObj.transform.position = enemyLoc.transform.position;
