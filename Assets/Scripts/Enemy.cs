@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour, InteractInterface {
 	public float startingHealth;
 	public float currentHealth;
 
+	private bool dead = false;
 	private float totalProbabilities = 0;
 
 	void Start () {
@@ -39,16 +40,26 @@ public class Enemy : MonoBehaviour, InteractInterface {
 	}
 	//enters door influence
 	void OnTriggerEnter2D(Collider2D collider){
+		if(dead==true)
+			return;
 		UIController.instance.setText("BEEP BEEP BEEP!!! It's 8 am! Press 'E' to turn off your alarm.");
 		collider.transform.GetComponent<PlayerInteractScript>().addAction((InteractInterface)this);
 	}
 	//leaves door influence
 	void OnTriggerExit2D(Collider2D collider){
+		if(dead==true)
+			return;
 		collider.transform.GetComponent<PlayerInteractScript>().removeAction();
 		UIController.instance.hideBubbles();
 	}
 	public void doAction(){
+		if(dead==true)
+			return;
 		PlayerPrefs.SetString("EnemyName", transform.name);
 		UIController.instance.cameraFadeToBattle(1.5f);
+	}
+	public void setDead(){
+		dead = true;
+		UIController.instance.hideBubbles();
 	}
 }

@@ -10,22 +10,25 @@ public class ContinuityManager : MonoBehaviour {
 
 	private bool setHealth = false;
 	private bool setPosition = false;
-
+	private bool ready = false;
 	// Use this for initialization
 	void Start () {
 
 		if(instance!=null)
 			Destroy(this.gameObject);
 
+		ready = true;
 		PlayerPrefs.SetString("EnemyName","None");
 		instance = this;
 		DontDestroyOnLoad(gameObject);
 	}
 
 	void OnLevelWasLoaded(int level){
-		Debug.Log("Level loaded: " + level);
+		if(ready==false)
+			return;
+		//Debug.Log("Level loaded: " + level);
 		if(level == 0){//main scene was loaded
-			Debug.Log("Main scene was loaded");
+			//Debug.Log("Main scene was loaded");
 
 			currentPoint++;
 			switch(PlayerPrefs.GetString("EnemyName")){
@@ -59,6 +62,10 @@ public class ContinuityManager : MonoBehaviour {
 		if(setPosition == true){
 			GameObject player = Linker.instance.player;
 			player.transform.position = Linker.instance.toObjects[currentPoint].transform.position;
+			for(int j = (currentPoint-1);j>=0;j--){
+				Linker.instance.anims[j].SetBool("Dead",true);
+				Linker.instance.anims[j].transform.GetComponent<Enemy>().setDead();
+			}
 			setPosition = false;
 		}
 	}

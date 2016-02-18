@@ -8,6 +8,7 @@ public class Linker : MonoBehaviour {
 	public GameObject parents;
 	public GameObject barista;
 	public GameObject[] toObjects;
+	public Animator[] anims;
 
 	public static Linker instance;
 	// Use this for initialization
