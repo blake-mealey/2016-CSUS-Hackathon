@@ -63,8 +63,14 @@ public class ContinuityManager : MonoBehaviour {
 			GameObject player = Linker.instance.player;
 			player.transform.position = Linker.instance.toObjects[currentPoint].transform.position;
 			for(int j = (currentPoint-1);j>=0;j--){
-				Linker.instance.anims[j].SetBool("Dead",true);
-				Linker.instance.anims[j].transform.GetComponent<Enemy>().setDead();
+				if(j==1){
+					Linker.instance.anims[j].SetBool("Dead", true);
+					Linker.instance.anims[j].transform.parent.GetChild(1).GetComponent<Animator>().SetBool("Dead", true);
+					Linker.instance.anims[j].transform.parent.GetComponent<Enemy>().setDead();
+				}else{
+					Linker.instance.anims[j].SetBool("Dead",true);
+					Linker.instance.anims[j].transform.GetComponent<Enemy>().setDead();
+				}
 			}
 			setPosition = false;
 		}

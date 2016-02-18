@@ -22,6 +22,8 @@ public class Conversation : MonoBehaviour, InteractInterface {
 
     public void doAction()
     {
+		if (currentSentence == convos.Length && isBattle)
+			return;
         UIController.instance.setText(convos[currentSentence]);
         currentSentence++;
         if (currentSentence == convos.Length && isBattle)
