@@ -28,6 +28,7 @@ public class BattleManager : MonoBehaviour {
 		instance = this;
 
 		PlayerPrefs.SetString("EnemyName", "Clock");
+
 		currentHealth = playerHealth;
 		enemyObj = (GameObject)Instantiate(Resources.Load(PlayerPrefs.GetString("EnemyName")));
 		enemyObj.transform.position = enemyLoc.transform.position;
@@ -88,6 +89,8 @@ public class BattleManager : MonoBehaviour {
 
 		if(turn==1){
 			attack(enemy.getNextEnemyAttack());
+		}else{
+			BattleUIManager.instance.startPlayerTurn();
 		}
 	}
 }
