@@ -77,6 +77,7 @@ public class BattleUIManager : MonoBehaviour {
 	}
 	public void displayPlayerAttack(Attack attack){
 		showText();
+		playerTurnEnd();
 		playerText.text = "You used " + attack.attackName + "!";
 		playerText.text = playerText.text += "\n" + attack.attackDescription;
 		enemyText.text = attack.effectDescription;
@@ -86,5 +87,18 @@ public class BattleUIManager : MonoBehaviour {
 		enemyText.text = PlayerPrefs.GetString("EnemyName") + " used " + attack.attackName + "!";
 		enemyText.text = enemyText.text += "\n" + attack.attackDescription;
 		playerText.text = attack.effectDescription;
+	}
+	public void playerTurnEnd(){
+		openMenu(0);
+		Button[] buttons = options.GetComponentsInChildren<Button>();
+		for(int j = 0;j<buttons.Length;j++){
+			buttons[j].interactable = false;
+		}
+	}
+	public void startPlayerTurn(){
+		Button[] buttons = options.GetComponentsInChildren<Button>();
+		for(int j = 0;j<buttons.Length;j++){
+			buttons[j].interactable = true;
+		}
 	}
 }
