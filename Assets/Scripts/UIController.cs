@@ -1,23 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour {
 
 	public static UIController instance;
 	public Text messageText;
-	public GameObject speechBubble;
-	public GameObject thoughtBubble;
 	public GameObject contextBubble;
 	public GameObject allBubbles;
 	public Image fadeImage;
 
 	private float ctime = 0f;
 	private float fadeTime = 1f;
-	private float fadePauseTime = 0;
+	private float fadePauseTime = 0.2f;
 	private bool fadeout = false;
 	private bool fadePause = false;
 	private bool fadein = false;
+	private bool sceneTransition = false;
 
 	private bool hideBoxes = false;
 	public float hideSpeed = 0.1f;
@@ -28,6 +28,10 @@ public class UIController : MonoBehaviour {
 		instance = this;
 		startPos = allBubbles.GetComponent<RectTransform>().position;
 		endPos = startPos - new Vector3(0,startPos.y+60,0);
+		hideBoxes = false;
+		fadePause = true;
+		fadein = true;
+		//setText("BEEP BEEP BEEP!!! It's 8 am, time to get up! Press 'E' to turn off your annoying alarm!");
 		//cameraFade(1f,0.5f);
 	}
 	
@@ -42,6 +46,9 @@ public class UIController : MonoBehaviour {
 				fadein = true;
 				ctime = 0;
 				fadeImage.color = new Color(0,0,0,1f);
+				if(sceneTransition){
+					SceneManager.LoadScene("battleScene");
+				}
 			}
 		}else if(fadePause){
 			
@@ -68,35 +75,25 @@ public class UIController : MonoBehaviour {
 		}
 	}
 
-	public void setText (int mode, string message){
+	public void setText (string message){
 		showBubbles();
 		messageText.text = message;
-		switch(mode){
-		case 0:
-			speechBubble.SetActive(true);
-			thoughtBubble.SetActive(false);
-			contextBubble.SetActive(false);
-			break;
-		case 1:
-			speechBubble.SetActive(false);
-			thoughtBubble.SetActive(true);
-			contextBubble.SetActive(false);
-			break;
-		case 2:
-			speechBubble.SetActive(false);
-			thoughtBubble.SetActive(false);
-			contextBubble.SetActive(true);
-			break;
-		}
+		contextBubble.SetActive(true);
 	}
 	public void cameraFade(float timeToFade, float nfadePauseTime){
 		fadeout = true;
 		fadein = true;
+		sceneTransition = false;
 		fadeTime = timeToFade;
 		if(nfadePauseTime!=0){
 			fadePauseTime = nfadePauseTime;
 			fadePause = true;
 		}
+	}
+	public void cameraFadeToBattle(float timeToFade){
+		fadeout = true;
+		sceneTransition = true;
+		fadeTime = timeToFade;
 	}
 	public void hideBubbles(){
 		hideBoxes = true;
