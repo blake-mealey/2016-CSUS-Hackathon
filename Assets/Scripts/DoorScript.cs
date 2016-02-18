@@ -25,13 +25,13 @@ public class DoorScript : MonoBehaviour, InteractInterface {
 			if(ctime>=moveTime){
 				player.transform.position = toPosition;
 				movePlayer = false;
-				UIController.instance.setText(2, message2);
+				UIController.instance.setText(message2);
 			}
 		}
 	}
 	//enters door influence
 	void OnTriggerEnter2D(Collider2D collider){
-		UIController.instance.setText(2, message);
+		UIController.instance.setText(message);
 		collider.transform.GetComponent<PlayerInteractScript>().addAction((InteractInterface)this);
 		player = collider.transform;
         ctime = 0;

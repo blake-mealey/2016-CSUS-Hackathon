@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Enemy : MonoBehaviour {
+public class Enemy : MonoBehaviour, InteractInterface {
 
 	public Attack[] playerAttacks;
 	public Attack[] enemyAttacks;
@@ -36,5 +36,19 @@ public class Enemy : MonoBehaviour {
 		else
 			return false;
 		
+	}
+	//enters door influence
+	void OnTriggerEnter2D(Collider2D collider){
+		UIController.instance.setText("BEEP BEEP BEEP!!! It's 8 am! Press 'E' to turn off your alarm.");
+		collider.transform.GetComponent<PlayerInteractScript>().addAction((InteractInterface)this);
+	}
+	//leaves door influence
+	void OnTriggerExit2D(Collider2D collider){
+		collider.transform.GetComponent<PlayerInteractScript>().removeAction();
+		UIController.instance.hideBubbles();
+	}
+	public void doAction(){
+		PlayerPrefs.SetString("EnemyName", transform.name);
+		UIController.instance.cameraFadeToBattle(1.5f);
 	}
 }
