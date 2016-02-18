@@ -14,9 +14,12 @@ public class ContinuityManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		if(instance!=null)
+		if(ContinuityManager.instance!=null){
 			Destroy(this.gameObject);
+			return;
+		}
 
+		PlayerPrefs.SetFloat("health", 100f);
 		ready = true;
 		PlayerPrefs.SetString("EnemyName","None");
 		instance = this;
@@ -45,7 +48,8 @@ public class ContinuityManager : MonoBehaviour {
 				currentPoint = 0;
 				break;
 			}
-			startingHealth += PlayerPrefs.GetInt("result") == 1 ? 0: -20;
+			float dif = PlayerPrefs.GetInt("result") == 1 ? 0: 20;
+			PlayerPrefs.SetFloat("health", PlayerPrefs.GetFloat("health")-dif);
 			setPosition = true;
 		}else{
 			setHealth = true;
@@ -54,10 +58,6 @@ public class ContinuityManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if(setHealth == true){
-			setHealth = false;
-			BattleManager.instance.currentHealth = startingHealth;
-		}
 			
 		if(setPosition == true){
 			GameObject player = Linker.instance.player;

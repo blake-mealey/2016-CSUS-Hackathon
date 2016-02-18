@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour, InteractInterface {
 	public string[] complaints;
 	public float startingHealth;
 	public float currentHealth;
+	public float fleeChance = 0.8f;
 	public string battleMessage;
 
 	private bool dead = false;

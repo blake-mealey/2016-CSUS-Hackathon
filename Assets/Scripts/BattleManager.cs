@@ -27,12 +27,13 @@ public class BattleManager : MonoBehaviour {
 	void Start () {
 		instance = this;
 
-		currentHealth = playerHealth;
+		currentHealth = PlayerPrefs.GetFloat("health");
 		enemyObj = (GameObject)Instantiate(Resources.Load(PlayerPrefs.GetString("EnemyName")));
 		enemyObj.transform.position = enemyLoc.transform.position;
 		enemy = enemyObj.GetComponent<Enemy>();
 		enemyHealthbar.setStartingHealth(enemy.startingHealth);
 		playerHealthbar.setStartingHealth(playerHealth);
+		playerHealthbar.updateHealth(currentHealth);
 
 		//Player attacks
 		playerAttacks = enemy.playerAttacks;
@@ -50,20 +51,22 @@ public class BattleManager : MonoBehaviour {
 			BattleUIManager.instance.displayPlayerAttack(attack);
 			bool state = enemy.applyDamage(attack.damage);
 			enemyHealthbar.updateHealth(Mathf.Max(0,enemy.currentHealth));
-			if(state == true){//You win.
+			if(state == true){//You win
 				PlayerPrefs.SetInt("result", 1);
-				SceneManager.LoadScene("main");
+				EndBattleUI.instance.setEndGame(true);
+			}else{
+				textShowing = true;
 			}
 		}else{
 			BattleUIManager.instance.displayEnemyAttack(attack);
 			currentHealth=Mathf.Max(0,currentHealth-attack.damage);
 			playerHealthbar.updateHealth(currentHealth);
-			if(currentHealth==0){
-				PlayerPrefs.SetInt("result", 0);
-				SceneManager.LoadScene("main");
+			if(currentHealth==0){//You lose
+				EndBattleUI.instance.setEndGame(false);
+			}else{
+				textShowing = true;
 			}
 		}
-		textShowing = true;
 	}
 	public void complain(){
 		int num = Random.Range(0,complaints.Count);
@@ -74,6 +77,17 @@ public class BattleManager : MonoBehaviour {
 			BattleUIManager.instance.doneComplaining();
 		}
 		textShowing = true;
+	}
+	public void flee(){
+		float chance = Random.Range(0f, 1f);
+		if(chance<enemy.fleeChance){
+			PlayerPrefs.SetInt("result", 0);
+			BattleUIManager.instance.displayComplaint("You fled the battle!");
+			EndBattleUI.instance.fleeBattle();
+		}else{
+			BattleUIManager.instance.displayComplaint("You attempted to flee, but failed!");
+			textShowing = true;
+		}
 	}
 	// Update is called once per frame
 	void Update () {
