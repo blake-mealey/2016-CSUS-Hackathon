@@ -68,6 +68,7 @@ public class BattleManager : MonoBehaviour {
 		textShowing = true;
 	}
 	public void complain(){
+		Debug.Log(complaints.Count);
 		int num = Random.Range(0,complaints.Count);
 		string temp = complaints[num];
 		complaints.RemoveAt(num);
