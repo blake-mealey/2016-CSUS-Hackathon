@@ -85,7 +85,7 @@ public class BattleManager : MonoBehaviour {
 			BattleUIManager.instance.displayComplaint("You fled the battle!");
 			EndBattleUI.instance.fleeBattle();
 		}else{
-			BattleUIManager.instance.displayComplaint("You attempted to flee, but failed!");
+			BattleUIManager.instance.displayComplaint("You attempted to flee, but failed! " + enemy.fleeMessage);
 			textShowing = true;
 		}
 	}

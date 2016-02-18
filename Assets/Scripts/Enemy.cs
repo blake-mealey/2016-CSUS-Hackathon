@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour, InteractInterface {
 	public float startingHealth;
 	public float currentHealth;
 	public float fleeChance = 0.8f;
+	public string fleeMessage;
 	public string battleMessage;
 
 	private bool dead = false;
