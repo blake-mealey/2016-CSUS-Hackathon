@@ -11,7 +11,7 @@ public class BattleManager : MonoBehaviour {
 	public GameObject enemyLoc;
 	private GameObject enemyObj;
 	public float playerHealth;
-	private float currentHealth;
+	public float currentHealth;
 	public HealthBarController playerHealthbar;
 	public HealthBarController enemyHealthbar;
 	private Attack[] playerAttacks;
@@ -26,8 +26,6 @@ public class BattleManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		instance = this;
-
-		PlayerPrefs.SetString("EnemyName", "Clock");
 
 		currentHealth = playerHealth;
 		enemyObj = (GameObject)Instantiate(Resources.Load(PlayerPrefs.GetString("EnemyName")));
@@ -68,7 +66,6 @@ public class BattleManager : MonoBehaviour {
 		textShowing = true;
 	}
 	public void complain(){
-		Debug.Log(complaints.Count);
 		int num = Random.Range(0,complaints.Count);
 		string temp = complaints[num];
 		complaints.RemoveAt(num);

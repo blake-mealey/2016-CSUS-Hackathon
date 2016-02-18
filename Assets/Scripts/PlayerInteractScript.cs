@@ -15,7 +15,7 @@ public class PlayerInteractScript : MonoBehaviour {
 
 		if(canInteract && Input.GetKeyDown(KeyCode.E) && action!=null){
 			action.doAction();
-			canInteract = false;
+			canInteract = true;
 		}
 
 	}
