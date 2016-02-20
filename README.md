@@ -1,8 +1,8 @@
 # First World Problems Simulator
 
-This was a group effort between Ben Roberts, David Sepulveda, Brandon Goberdhansingh, and myself
-Third place winner for the [CSUS](http://csus.cpsc.ucalgary.ca) 2016 Hackathon.
-Hackathon Theme: First World Problems
+This was a group effort between Ben Roberts, David Sepulveda, Brandon Goberdhansingh, and myself.
+
+Third place winner for the [CSUS](http://csus.cpsc.ucalgary.ca) 2016 Hackathon. The theme for the hackathon was "First World Problems"
 
 ## Try It
 
